@@ -1221,8 +1221,17 @@ function renderEditList(containerId, tasks, type) {
   tasks.forEach((task) => {
     const row = document.createElement('div');
     row.className = 'edit-item';
-    row.dataset.id = task.id;
     row.innerHTML = '<div class="edit-item-text">' + task.text + (task.sub ? '<div class="edit-item-sub">' + task.sub + '</div>' : '') + '</div><button class="delete-btn">&times;</button>';
+    row.querySelector('.delete-btn').addEventListener('click', () => {
+      const list = type === 'morning' ? morningTasks : eveningTasks;
+      const idx = list.findIndex(t => t.id === task.id);
+      if (idx === -1) return;
+      list.splice(idx, 1);
+      if (type === 'morning') { saveTasks('morning', morningTasks); renderMorning(); }
+      else { saveTasks('evening', eveningTasks); renderEvening(); }
+      renderEditMode();
+      showToast('Removed');
+    });
     container.appendChild(row);
   });
   const addRow = document.createElement('div');
@@ -1232,18 +1241,6 @@ function renderEditList(containerId, tasks, type) {
   addRow.querySelector('.add-task-btn').addEventListener('click', () => addTask(type, inputId));
   addRow.querySelector('.add-task-input').addEventListener('keydown', e => { if (e.key === 'Enter') addTask(type, inputId); });
   container.appendChild(addRow);
-  container.addEventListener('click', function handleDelete(e) {
-    if (!e.target.classList.contains('delete-btn')) return;
-    const id = e.target.closest('.edit-item').dataset.id;
-    const list = type === 'morning' ? morningTasks : eveningTasks;
-    const idx = list.findIndex(t => t.id === id);
-    if (idx === -1) return;
-    list.splice(idx, 1);
-    if (type === 'morning') { saveTasks('morning', morningTasks); renderMorning(); }
-    else { saveTasks('evening', eveningTasks); renderEvening(); }
-    renderEditMode();
-    showToast('Removed');
-  }, { once: true });
 }
 
 function addTask(type, inputId) {
@@ -1281,22 +1278,19 @@ function renderEditZone(i) {
   zone.tasks.forEach((task) => {
     const row = document.createElement('div');
     row.className = 'edit-item';
-    row.dataset.id = task.id;
     row.innerHTML = '<div class="edit-item-text">' + task.text + '</div><button class="delete-btn">&times;</button>';
+    row.querySelector('.delete-btn').addEventListener('click', () => {
+      const idx = zone.tasks.findIndex(t => t.id === task.id);
+      if (idx === -1) return;
+      zone.tasks.splice(idx, 1);
+      saveTasks('zones', zones);
+      renderMorning();
+      renderEditZone(i);
+      renderZonePills();
+      showToast('Removed');
+    });
     container.appendChild(row);
   });
-  container.addEventListener('click', function handleZoneDelete(e) {
-    if (!e.target.classList.contains('delete-btn')) return;
-    const id = e.target.closest('.edit-item').dataset.id;
-    const idx = zone.tasks.findIndex(t => t.id === id);
-    if (idx === -1) return;
-    zone.tasks.splice(idx, 1);
-    saveTasks('zones', zones);
-    renderMorning();
-    renderEditZone(i);
-    renderZonePills();
-    showToast('Removed');
-  }, { once: true });
   const addRow = document.createElement('div');
   addRow.className = 'add-task-row';
   const inputId = 'addInput_zone' + i;
