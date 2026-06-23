@@ -1324,6 +1324,12 @@ function showPanel(name, btn) {
   document.getElementById('headerSub').textContent = labels[name] || '';
 }
 
+const PROVERBS_CACHE_VERSION = 'web_v1';
+if (localStorage.getItem('proverbs_cache_version') !== PROVERBS_CACHE_VERSION) {
+  for (let i = 1; i <= 31; i++) localStorage.removeItem('proverbs_' + i);
+  localStorage.setItem('proverbs_cache_version', PROVERBS_CACHE_VERSION);
+}
+
 async function loadProverbs(day) {
   const el = document.getElementById('morningQuote');
   const labelEl = document.getElementById('devoLabel');
@@ -1332,7 +1338,7 @@ async function loadProverbs(day) {
   const cached = localStorage.getItem(cacheKey);
   if (cached) { displayProverbs(cached, chapter, labelEl, el); return; }
   try {
-    const res = await fetch('https://bible-api.com/proverbs+' + chapter + '?translation=kjv');
+    const res = await fetch('https://bible-api.com/proverbs+' + chapter + '?translation=web');
     const data = await res.json();
     if (data && data.text) { localStorage.setItem(cacheKey, data.text); displayProverbs(data.text, chapter, labelEl, el); }
     else { loadFallbackProverbs(labelEl, el); }
@@ -1342,7 +1348,7 @@ async function loadProverbs(day) {
 function loadFallbackProverbs(labelEl, el) {
   const cached = localStorage.getItem('proverbs_31');
   if (cached) { displayProverbs(cached, 31, labelEl, el); return; }
-  fetch('https://bible-api.com/proverbs+31?translation=kjv')
+  fetch('https://bible-api.com/proverbs+31?translation=web')
     .then(r => r.json())
     .then(data => {
       if (data && data.text) { localStorage.setItem('proverbs_31', data.text); displayProverbs(data.text, 31, labelEl, el); }
