@@ -209,7 +209,14 @@
     line-height: 1.75;
     color: rgba(250,246,238,0.85);
     margin-bottom: 14px;
-    white-space: pre-line;
+  }
+
+  .devotional-full p {
+    margin-bottom: 10px;
+  }
+
+  .devotional-full p:last-child {
+    margin-bottom: 0;
   }
 
   .devo-expand-btn {
@@ -1353,7 +1360,7 @@ function displayProverbs(fullText, chapter, labelEl, el) {
   const fullEl = document.getElementById('proverbsFull');
   const toggleBtn = document.getElementById('proverbsToggle');
 
-  fullEl.textContent = verses.join('\n');
+  fullEl.innerHTML = verses.map(v => '<p>' + v.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;') + '</p>').join('');
   fullEl.style.display = 'none';
   el.style.display = '';
 
