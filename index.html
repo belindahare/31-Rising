@@ -1,0 +1,1311 @@
+<!DOCTYPE html>
+<!-- saved from url=(0050)file:///Users/belindahare/Downloads/routine_3.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<title>31 Rising</title>
+<link href="./index_files/css2" rel="stylesheet">
+<style>
+  :root {
+    --linen: #f5f2ec;
+    --linen-dark: #ece8df;
+    --linen-deep: #ddd8cd;
+    --gold: #c47e2a;
+    --gold-light: #d99a40;
+    --gold-pale: #f5ead8;
+    --forest: #2e4e38;
+    --forest-mid: #3f6449;
+    --forest-pale: #dde8de;
+    --berry: #3b3265;
+    --berry-mid: #5a4f8a;
+    --berry-pale: #eae8f5;
+    --citrus: #d9661e;
+    --citrus-pale: #faeee6;
+    --rust: #c05e28;
+    --ink: #1a1714;
+    --ink-mid: #4a4440;
+    --ink-light: #8a8278;
+    --rule: #ccc8be;
+    --white-warm: #fdfaf5;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Josefin Sans', sans-serif;
+    background: var(--linen);
+    color: var(--ink);
+    min-height: 100vh;
+    min-height: 100dvh;
+  }
+
+  /* ---- HEADER ---- */
+  .header {
+    background: var(--linen);
+    border-bottom: 1px solid var(--rule);
+    padding: 20px 20px 0;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+
+  .header-eyebrow {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--ink-light);
+    margin-bottom: 4px;
+  }
+
+  .header-main {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    padding-bottom: 14px;
+  }
+
+  .app-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 34px;
+    font-weight: 900;
+    letter-spacing: -0.01em;
+    line-height: 1;
+    color: var(--ink);
+  }
+
+  .app-title span {
+    color: var(--gold);
+  }
+
+  .header-right {
+    text-align: right;
+  }
+
+  .date-day {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--gold);
+    line-height: 1;
+  }
+
+  .date-month {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-light);
+    margin-top: 2px;
+  }
+
+  .header-rule {
+    height: 2px;
+    background: var(--ink);
+    margin: 0 -20px;
+    position: relative;
+  }
+
+  .header-rule::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 20px;
+    right: 20px;
+    height: 1px;
+    background: var(--rule);
+  }
+
+  /* ---- TABS ---- */
+  .tab-bar {
+    display: flex;
+    background: var(--linen);
+    position: sticky;
+    top: 103px;
+    z-index: 9;
+    border-bottom: 1px solid var(--rule);
+    padding: 0 20px;
+    gap: 0;
+  }
+
+  .tab {
+    flex: 1;
+    padding: 11px 4px 10px;
+    text-align: center;
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink-light);
+    cursor: pointer;
+    border: none;
+    background: none;
+    border-bottom: 2px solid transparent;
+    transition: color 0.2s, border-color 0.2s;
+    margin-bottom: -1px;
+  }
+
+  .tab.active {
+    color: var(--ink);
+    border-bottom-color: var(--berry);
+  }
+
+  /* ---- CONTENT ---- */
+  .content {
+    padding: 24px 20px 100px;
+    max-width: 480px;
+    margin: 0 auto;
+  }
+
+  /* ---- DEVOTIONAL CARD ---- */
+  .devotional-card {
+    background: var(--forest);
+    color: var(--white-warm);
+    padding: 20px 22px;
+    margin-bottom: 24px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .devotional-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--gold);
+  }
+
+  .devotional-label {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold-light);
+    margin-bottom: 10px;
+  }
+
+  .devotional-text {
+    font-family: 'Libre Baskerville', serif;
+    font-style: italic;
+    font-size: 15px;
+    line-height: 1.65;
+    margin-bottom: 18px;
+    color: rgba(250,246,238,0.9);
+  }
+
+  .devotional-rule {
+    height: 1px;
+    background: rgba(255,255,255,0.15);
+    margin-bottom: 14px;
+  }
+
+  .devotional-links { display: flex; gap: 10px; }
+
+  .devo-btn {
+    flex: 1;
+    background: rgba(59,50,101,0.25);
+    border: 1px solid rgba(255,255,255,0.2);
+    color: var(--white-warm);
+    padding: 9px 10px;
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    text-align: center;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+
+  .devo-btn:hover { background: rgba(255,255,255,0.18); }
+
+  /* ---- ZONE CARD ---- */
+  .zone-card {
+    border: 1px solid var(--rule);
+    border-top: 3px solid var(--citrus);
+    background: var(--white-warm);
+    padding: 14px 16px;
+    margin-bottom: 24px;
+  }
+
+  .zone-eyebrow {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--citrus);
+    margin-bottom: 4px;
+  }
+
+  .zone-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1.2;
+  }
+
+  .zone-tip {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 300;
+    color: var(--ink-mid);
+    margin-top: 6px;
+    line-height: 1.5;
+    letter-spacing: 0.03em;
+  }
+
+  /* ---- SECTION HEADER ---- */
+  .section-head {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+    margin-top: 4px;
+  }
+
+  .section-head-label {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--ink-light);
+    white-space: nowrap;
+  }
+
+  .section-rule {
+    flex: 1;
+    height: 1px;
+    background: var(--rule);
+  }
+
+  /* ---- PROGRESS ---- */
+  .progress-wrap {
+    margin-bottom: 16px;
+  }
+
+  .progress-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 6px;
+  }
+
+  .progress-label {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--berry);
+  }
+
+  .progress-count {
+    font-family: 'Playfair Display', serif;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--berry);
+  }
+
+  .progress-track {
+    height: 3px;
+    background: var(--linen-deep);
+    overflow: hidden;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: var(--berry);
+    transition: width 0.4s ease;
+  }
+
+  /* ---- CHECKLIST ---- */
+  .checklist {
+    background: var(--white-warm);
+    border: 1px solid var(--rule);
+    margin-bottom: 24px;
+    overflow: hidden;
+  }
+
+  .check-item {
+    display: flex;
+    align-items: flex-start;
+    padding: 13px 16px;
+    border-bottom: 1px solid var(--linen);
+    cursor: pointer;
+    gap: 13px;
+    -webkit-tap-highlight-color: transparent;
+    transition: background 0.15s;
+  }
+
+  .check-item:last-child { border-bottom: none; }
+  .check-item:active { background: var(--linen); }
+
+  .check-item.done .item-text {
+    color: var(--ink-light);
+    text-decoration: line-through;
+  }
+
+  .checkbox {
+    width: 18px; height: 18px;
+    border: 1.5px solid var(--rule);
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    margin-top: 2px;
+    background: var(--linen);
+  }
+
+  .check-item.done .checkbox {
+    background: var(--forest);
+    border-color: var(--forest);
+  }
+
+  .check-icon { display: none; }
+  .check-item.done .check-icon { display: block; }
+
+  .item-text {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    line-height: 1.5;
+    color: var(--ink);
+    transition: color 0.2s;
+    flex: 1;
+  }
+
+  .item-sub {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 10px;
+    font-weight: 300;
+    letter-spacing: 0.04em;
+    color: var(--ink-light);
+    margin-top: 2px;
+  }
+
+  /* ---- RESET BTN ---- */
+  .reset-btn {
+    width: 100%;
+    padding: 11px;
+    background: transparent;
+    border: 1px solid var(--rule);
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink-light);
+    cursor: pointer;
+    transition: all 0.2s;
+    margin-top: 4px;
+  }
+
+  .reset-btn:hover { border-color: var(--ink-mid); color: var(--ink); }
+
+  /* ---- EVENING ---- */
+  .evening-header {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 700;
+    font-style: italic;
+    color: var(--ink);
+    margin-bottom: 4px;
+  }
+
+  .evening-sub {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 300;
+    letter-spacing: 0.05em;
+    color: var(--ink-mid);
+    margin-bottom: 22px;
+    line-height: 1.6;
+  }
+
+  /* ---- ALL DONE ---- */
+  .all-done {
+    text-align: center;
+    padding: 36px 20px;
+    border: 1px solid var(--rule);
+    background: var(--white-warm);
+    margin-top: 8px;
+  }
+
+  .all-done-rule {
+    width: 40px;
+    height: 2px;
+    background: var(--berry);
+    margin: 0 auto 16px;
+  }
+
+  .all-done-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 8px;
+  }
+
+  .all-done-sub {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 300;
+    letter-spacing: 0.06em;
+    color: var(--ink-mid);
+    line-height: 1.7;
+  }
+
+  /* ---- PANELS ---- */
+  .panel { display: none; }
+  .panel.active { display: block; }
+
+  /* ---- TOAST ---- */
+  .toast {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%) translateY(80px);
+    background: var(--ink);
+    color: var(--white-warm);
+    padding: 10px 22px;
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    transition: transform 0.3s ease;
+    z-index: 100;
+    pointer-events: none;
+  }
+
+  .toast.show { transform: translateX(-50%) translateY(0); }
+
+  /* ---- EDIT MODE ---- */
+  .edit-section {
+    background: var(--white-warm);
+    border: 1px solid var(--rule);
+    margin-bottom: 24px;
+    overflow: hidden;
+  }
+
+  .edit-section-header {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--linen);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--linen-dark);
+  }
+
+  .edit-section-title {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--berry);
+  }
+
+  .edit-section-count {
+    font-family: 'Playfair Display', serif;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--citrus);
+  }
+
+  .edit-item {
+    display: flex;
+    align-items: center;
+    padding: 11px 16px;
+    border-bottom: 1px solid var(--linen);
+    gap: 10px;
+  }
+
+  .edit-item:last-child { border-bottom: none; }
+
+  .edit-item-text {
+    flex: 1;
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: 0.03em;
+    color: var(--ink);
+    line-height: 1.4;
+  }
+
+  .edit-item-sub {
+    font-size: 10px;
+    font-weight: 300;
+    color: var(--ink-light);
+    margin-top: 2px;
+  }
+
+  .delete-btn {
+    width: 26px; height: 26px;
+    border: none;
+    background: none;
+    color: var(--rule);
+    font-size: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: color 0.2s;
+    line-height: 1;
+    padding-bottom: 1px;
+  }
+
+  .delete-btn:hover { color: var(--rust); }
+
+  .add-task-row {
+    padding: 10px 16px;
+    border-top: 1px solid var(--linen);
+    display: flex;
+    gap: 8px;
+    background: var(--linen);
+  }
+
+  .add-task-input {
+    flex: 1;
+    border: 1px solid var(--rule);
+    background: var(--white-warm);
+    padding: 8px 12px;
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.03em;
+    color: var(--ink);
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  .add-task-input:focus { border-color: var(--forest); }
+  .add-task-input::placeholder { color: var(--rule); }
+
+  .add-task-btn {
+    padding: 8px 16px;
+    background: var(--berry);
+    color: var(--white-warm);
+    border: none;
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+
+  .add-task-btn:hover { background: var(--forest-mid); }
+
+  .edit-intro {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 300;
+    letter-spacing: 0.04em;
+    color: var(--ink-mid);
+    line-height: 1.7;
+    margin-bottom: 20px;
+  }
+
+  .zone-edit-tabs {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 14px;
+    flex-wrap: wrap;
+  }
+
+  .zone-pill {
+    padding: 5px 12px;
+    border: 1px solid var(--rule);
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-light);
+    cursor: pointer;
+    background: var(--white-warm);
+    transition: all 0.2s;
+  }
+
+  .zone-pill.active {
+    background: var(--berry);
+    border-color: var(--berry);
+    color: var(--white-warm);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; }
+  }
+
+  /* ---- BANNERS ---- */
+  .section-banner {
+    width: calc(100% + 40px);
+    margin-left: -20px;
+    height: 140px;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 20px;
+    border-bottom: 2px solid var(--ink);
+  }
+
+  .section-banner::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 20px;
+    right: 20px;
+    height: 1px;
+    background: var(--rule);
+  }
+
+  .banner-bg {
+    position: absolute;
+    inset: 0;
+    background: var(--linen-dark);
+  }
+
+  .banner-svg {
+    position: absolute;
+    height: 170px;
+    width: auto;
+    bottom: -5px;
+    opacity: 0.9;
+  }
+
+  .banner-svg.right {
+    right: -5px;
+  }
+
+  .banner-svg.left {
+    left: -30px;
+  }
+
+  .banner-text-wrap {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 24px 0 80px;
+  }
+
+  .banner-eyebrow {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--ink-mid);
+    margin-bottom: 6px;
+  }
+
+  .banner-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    font-weight: 900;
+    color: var(--ink);
+    line-height: 1;
+  }
+
+  .banner-title em {
+    color: var(--citrus);
+    font-style: italic;
+  }
+
+  .banner-rule {
+    width: 32px;
+    height: 2px;
+    background: var(--citrus);
+    margin-top: 10px;
+  }
+
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-eyebrow" id="headerSub">Evening Wind Down</div>
+  <div class="header-main">
+    <div class="app-title">31<span>.</span><br>Rising</div>
+    <div class="header-right">
+      <div class="date-day" id="dateDay">22</div>
+      <div class="date-month" id="dateMonth">June 2026</div>
+    </div>
+  </div>
+  <div class="header-rule"></div>
+</div>
+
+<div class="tab-bar">
+  <button class="tab active" onclick="showPanel(&#39;morning&#39;, this)">Morning</button>
+  <button class="tab" onclick="showPanel(&#39;evening&#39;, this)">Evening</button>
+  <button class="tab" onclick="showPanel(&#39;edit&#39;, this)">Edit Lists</button>
+</div>
+
+<div class="content">
+
+  <!-- MORNING -->
+  <div class="panel active" id="panel-morning">
+
+    <div class="section-banner">
+      <div class="banner-bg"></div>
+      <svg class="banner-svg right" viewBox="0 0 220 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <!-- Stem -->
+        <path d="M110 200 Q100 160 90 130 Q80 100 95 70 Q105 45 100 20" stroke="#2e4e38" stroke-width="2.5" fill="none" stroke-linecap="round"></path>
+        <!-- Large leaves -->
+        <path d="M95 130 Q60 115 45 90 Q65 88 90 105 Z" fill="#3f6449" opacity="0.75"></path>
+        <path d="M90 105 Q55 85 50 58 Q72 62 88 85 Z" fill="#2e4e38" opacity="0.8"></path>
+        <path d="M95 130 Q130 118 140 95 Q120 90 98 110 Z" fill="#4a7a5a" opacity="0.65"></path>
+        <path d="M92 80 Q120 65 130 40 Q108 45 90 68 Z" fill="#3f6449" opacity="0.7"></path>
+        <path d="M96 155 Q65 148 55 125 Q78 128 95 145 Z" fill="#2e4e38" opacity="0.6"></path>
+        <!-- Small berry cluster -->
+        <circle cx="70" cy="78" r="7" fill="#3b3265" opacity="0.8"></circle>
+        <circle cx="82" cy="72" r="6" fill="#3b3265" opacity="0.85"></circle>
+        <circle cx="76" cy="65" r="5.5" fill="#4a408a" opacity="0.75"></circle>
+        <circle cx="63" cy="70" r="5" fill="#3b3265" opacity="0.7"></circle>
+        <!-- Orange slice hint -->
+        <circle cx="145" cy="75" r="22" fill="#d9661e" opacity="0.3"></circle>
+        <circle cx="145" cy="75" r="18" fill="#e8842a" opacity="0.25"></circle>
+        <line x1="145" y1="57" x2="145" y2="93" stroke="#c05e1a" stroke-width="1" opacity="0.4"></line>
+        <line x1="127" y1="75" x2="163" y2="75" stroke="#c05e1a" stroke-width="1" opacity="0.4"></line>
+        <line x1="132" y1="62" x2="158" y2="88" stroke="#c05e1a" stroke-width="1" opacity="0.35"></line>
+        <line x1="158" y1="62" x2="132" y2="88" stroke="#c05e1a" stroke-width="1" opacity="0.35"></line>
+      </svg>
+      <svg class="banner-svg left" viewBox="0 0 160 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <!-- Tall herb stems -->
+        <path d="M80 200 Q75 165 70 130 Q65 95 72 60 Q76 35 74 10" stroke="#2e4e38" stroke-width="2" fill="none" stroke-linecap="round"></path>
+        <path d="M95 200 Q90 170 88 140 Q85 110 90 80 Q94 55 92 25" stroke="#3f6449" stroke-width="1.5" fill="none" stroke-linecap="round" opacity="0.7"></path>
+        <!-- Fine feathery leaves -->
+        <path d="M72 120 Q50 112 42 98 Q58 97 72 110 Z" fill="#3f6449" opacity="0.7"></path>
+        <path d="M70 95 Q48 84 42 68 Q60 70 70 85 Z" fill="#2e4e38" opacity="0.75"></path>
+        <path d="M72 70 Q52 58 48 42 Q65 46 72 62 Z" fill="#4a7a5a" opacity="0.65"></path>
+        <path d="M72 120 Q92 110 98 94 Q82 95 72 108 Z" fill="#2e4e38" opacity="0.6"></path>
+        <path d="M70 95 Q90 82 95 65 Q78 68 70 82 Z" fill="#3f6449" opacity="0.65"></path>
+        <!-- Tiny flower dots at top -->
+        <circle cx="74" cy="22" r="3" fill="#c4962a" opacity="0.7"></circle>
+        <circle cx="70" cy="16" r="2.5" fill="#d9a840" opacity="0.65"></circle>
+        <circle cx="78" cy="14" r="2" fill="#c4962a" opacity="0.6"></circle>
+        <circle cx="92" cy="30" r="2.5" fill="#c4962a" opacity="0.55"></circle>
+      </svg>
+      <div class="banner-text-wrap">
+        <div class="banner-eyebrow" id="headerSub2">Morning Routine</div>
+        <div class="banner-title">Good<br><em>Morning</em></div>
+        <div class="banner-rule"></div>
+      </div>
+    </div>
+
+    <div class="devotional-card">
+      <div class="devotional-label" id="devoLabel">Proverbs 22</div>
+      <div class="devotional-text" id="morningQuote">A good name is rather to be chosen than great riches, …</div>
+      <div class="devotional-rule"></div>
+      <div class="devotional-links">
+        <a class="devo-btn" href="https://open.spotify.com/show/0GiyTkPbFKiGhAMl6bLArV" target="_blank">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" opacity="0.8"><path d="M17.9 10.9C14.7 9 9.35 8.8 6.3 9.75c-.5.15-1-.15-1.15-.6-.15-.5.15-1 .6-1.15 3.55-1.05 9.4-.85 13.1 1.35.45.25.6.85.35 1.3-.25.35-.85.5-1.3.25zm-.1 2.8c-.25.35-.7.5-1.05.25-2.7-1.65-6.8-2.15-9.95-1.15-.4.1-.85-.1-.95-.5-.1-.4.1-.85.5-.95 3.65-1.1 8.15-.55 11.25 1.35.3.15.45.65.2 1zm-1.2 2.75c-.2.3-.55.4-.85.2-2.35-1.45-5.3-1.75-8.8-.95-.35.1-.65-.15-.75-.45-.1-.35.15-.65.45-.75 3.8-.85 7.1-.5 9.7 1.1.35.2.4.55.25.85z"></path></svg>
+          Renewing Your Mind
+        </a>
+        <a class="devo-btn" href="https://www.audible.com/" target="_blank">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" opacity="0.8"><path d="M12 3C7.03 3 3 7.03 3 12s4.03 9 9 9 9-4.03 9-9-4.03-9-9-9zm-1.5 13.5v-9l6 4.5-6 4.5z"></path></svg>
+          Bible on Audible
+        </a>
+      </div>
+    </div>
+
+    <div class="zone-card">
+      <div class="zone-eyebrow">Today's Focus Zone</div>
+      <div class="zone-name" id="zoneName">Entrance &amp; Dining</div>
+      <div class="zone-tip" id="zoneTip">Clear the entry, wipe the table, sweep near the door.</div>
+    </div>
+
+    <div class="progress-wrap">
+      <div class="progress-meta">
+        <span class="progress-label">Progress</span>
+        <span class="progress-count" id="morningProgressCount">0 / 10</span>
+      </div>
+      <div class="progress-track">
+        <div class="progress-fill" id="morningProgressFill" style="width:0%"></div>
+      </div>
+    </div>
+
+    <div class="section-head">
+      <span class="section-head-label">Daily Tasks</span>
+      <div class="section-rule"></div>
+    </div>
+    <div class="checklist" id="morningChecklist"><div class="check-item"><div class="checkbox"><svg class="check-icon" width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#faf6ee" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></div><div><div class="item-text">Listen to devotional</div><div class="item-sub">Tap above to open Renewing Your Mind or Audible</div></div></div><div class="check-item"><div class="checkbox"><svg class="check-icon" width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#faf6ee" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></div><div><div class="item-text">Decide what's for dinner</div><div class="item-sub">Check the fridge and get meat out to defrost</div></div></div><div class="check-item"><div class="checkbox"><svg class="check-icon" width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#faf6ee" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></div><div><div class="item-text">Quick tidy — living areas</div><div class="item-sub">Pillows, blankets, surfaces</div></div></div><div class="check-item"><div class="checkbox"><svg class="check-icon" width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#faf6ee" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></div><div><div class="item-text">Wipe kitchen counters</div></div></div><div class="check-item"><div class="checkbox"><svg class="check-icon" width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#faf6ee" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></div><div><div class="item-text">Empty or run the dishwasher</div></div></div><div class="check-item"><div class="checkbox"><svg class="check-icon" width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#faf6ee" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></div><div><div class="item-text">Start a load of laundry</div><div class="item-sub">Or move yesterday's load forward</div></div></div><div class="check-item"><div class="checkbox"><svg class="check-icon" width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#faf6ee" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></div><div><div class="item-text">Swish &amp; swipe the bathroom</div><div class="item-sub">Quick toilet wipe, sink wipe, mirror if needed</div></div></div></div>
+
+    <div class="section-head">
+      <span class="section-head-label">Zone Tasks</span>
+      <div class="section-rule"></div>
+    </div>
+    <div class="checklist" id="zoneChecklist"><div class="check-item"><div class="checkbox"><svg class="check-icon" width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#faf6ee" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></div><div><div class="item-text">Clear and wipe entry surfaces</div></div></div><div class="check-item"><div class="checkbox"><svg class="check-icon" width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#faf6ee" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></div><div><div class="item-text">Sweep or vacuum entryway</div></div></div><div class="check-item"><div class="checkbox"><svg class="check-icon" width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#faf6ee" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></div><div><div class="item-text">Wipe dining table and chairs</div></div></div></div>
+
+    <button class="reset-btn" onclick="resetMorning()">Start Fresh</button>
+
+    <div class="all-done" id="morningDone" style="display:none">
+      <div class="all-done-rule"></div>
+      <div class="all-done-title">Well done.</div>
+      <div class="all-done-sub">Your home is tended.<br>Go do the work you're called to do today.</div>
+    </div>
+  </div>
+
+  <!-- EVENING -->
+  <div class="panel" id="panel-evening">
+
+    <div class="section-banner">
+      <div class="banner-bg"></div>
+      <svg class="banner-svg right" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <!-- Lavender spikes -->
+        <path d="M100 200 Q98 160 97 120 Q96 85 98 50 Q99 28 100 10" stroke="#3b3265" stroke-width="2" fill="none" stroke-linecap="round"></path>
+        <path d="M118 200 Q116 165 115 135 Q114 105 116 75 Q117 52 118 30" stroke="#4a408a" stroke-width="1.5" fill="none" stroke-linecap="round" opacity="0.7"></path>
+        <path d="M84 200 Q83 168 82 140 Q81 112 83 85 Q84 62 84 40" stroke="#3b3265" stroke-width="1.5" fill="none" stroke-linecap="round" opacity="0.65"></path>
+        <!-- Tiny lavender buds along stems -->
+        <ellipse cx="100" cy="18" rx="4" ry="6" fill="#5a4f8a" opacity="0.7"></ellipse>
+        <ellipse cx="100" cy="30" rx="3.5" ry="5" fill="#6b60a0" opacity="0.65"></ellipse>
+        <ellipse cx="100" cy="42" rx="3" ry="4.5" fill="#5a4f8a" opacity="0.6"></ellipse>
+        <ellipse cx="118" cy="38" rx="3.5" ry="5.5" fill="#4a408a" opacity="0.65"></ellipse>
+        <ellipse cx="118" cy="50" rx="3" ry="4.5" fill="#5a4f8a" opacity="0.6"></ellipse>
+        <ellipse cx="84" cy="48" rx="3" ry="5" fill="#6b60a0" opacity="0.6"></ellipse>
+        <!-- Tiny narrow leaves -->
+        <path d="M98 80 Q82 75 78 65 Q90 66 98 76 Z" fill="#3f6449" opacity="0.55"></path>
+        <path d="M98 100 Q80 94 76 82 Q90 84 98 96 Z" fill="#2e4e38" opacity="0.5"></path>
+        <path d="M98 80 Q114 74 118 62 Q106 64 98 76 Z" fill="#3f6449" opacity="0.5"></path>
+      </svg>
+      <svg class="banner-svg left" viewBox="0 0 160 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <!-- Soft arching branch -->
+        <path d="M30 200 Q50 165 65 130 Q80 95 90 60 Q98 32 100 10" stroke="#2e4e38" stroke-width="2.5" fill="none" stroke-linecap="round"></path>
+        <!-- Rounded leaves -->
+        <path d="M55 160 Q30 155 22 138 Q42 138 54 152 Z" fill="#3f6449" opacity="0.7"></path>
+        <path d="M65 130 Q40 122 34 104 Q54 108 64 124 Z" fill="#2e4e38" opacity="0.75"></path>
+        <path d="M75 100 Q50 90 46 72 Q66 78 74 95 Z" fill="#4a7a5a" opacity="0.65"></path>
+        <path d="M65 130 Q88 124 92 108 Q74 110 65 126 Z" fill="#3f6449" opacity="0.6"></path>
+        <path d="M82 72 Q105 62 108 44 Q90 50 80 68 Z" fill="#2e4e38" opacity="0.65"></path>
+        <!-- Moon hint -->
+        <path d="M120 35 Q108 28 106 18 Q118 14 126 24 Q132 32 120 35 Z" fill="#c4962a" opacity="0.35"></path>
+      </svg>
+      <div class="banner-text-wrap">
+        <div class="banner-eyebrow">Evening Reset</div>
+        <div class="banner-title">Wind<br><em>Down</em></div>
+        <div class="banner-rule"></div>
+      </div>
+    </div>
+
+
+    <div class="progress-wrap">
+      <div class="progress-meta">
+        <span class="progress-label">Progress</span>
+        <span class="progress-count" id="eveningProgressCount">0 / 5</span>
+      </div>
+      <div class="progress-track">
+        <div class="progress-fill" id="eveningProgressFill" style="width:0%"></div>
+      </div>
+    </div>
+
+    <div class="checklist" id="eveningChecklist"><div class="check-item"><div class="checkbox"><svg class="check-icon" width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#faf6ee" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></div><div><div class="item-text">Clear and wipe kitchen counters</div></div></div><div class="check-item"><div class="checkbox"><svg class="check-icon" width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#faf6ee" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></div><div><div class="item-text">Load or run the dishwasher</div></div></div><div class="check-item"><div class="checkbox"><svg class="check-icon" width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#faf6ee" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></div><div><div class="item-text">Move laundry forward or fold what's done</div></div></div><div class="check-item"><div class="checkbox"><svg class="check-icon" width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#faf6ee" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></div><div><div class="item-text">Quick living room reset</div><div class="item-sub">Pillows, throw blankets, anything out of place</div></div></div><div class="check-item"><div class="checkbox"><svg class="check-icon" width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#faf6ee" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></div><div><div class="item-text">Set out anything needed for tomorrow morning</div></div></div></div>
+    <button class="reset-btn" onclick="resetEvening()">Start Fresh</button>
+
+    <div class="all-done" id="eveningDone" style="display:none">
+      <div class="all-done-rule"></div>
+      <div class="all-done-title">Rest well.</div>
+      <div class="all-done-sub">The house is ready for tomorrow.<br>You did good today.</div>
+    </div>
+  </div>
+
+  <!-- EDIT -->
+  <div class="panel" id="panel-edit">
+
+    <div class="section-banner">
+      <div class="banner-bg"></div>
+      <svg class="banner-svg right" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <!-- Rosemary-style stems -->
+        <path d="M110 200 Q106 165 103 130 Q100 95 104 62 Q107 38 108 15" stroke="#2e4e38" stroke-width="2" fill="none" stroke-linecap="round"></path>
+        <path d="M128 200 Q124 168 122 138 Q119 108 122 78 Q125 54 126 30" stroke="#3f6449" stroke-width="1.5" fill="none" stroke-linecap="round" opacity="0.7"></path>
+        <path d="M92 200 Q90 170 88 142 Q86 114 89 86 Q92 62 90 38" stroke="#2e4e38" stroke-width="1.5" fill="none" stroke-linecap="round" opacity="0.6"></path>
+        <!-- Needle-like leaves -->
+        <path d="M103 120 Q85 116 80 108 Q93 108 103 117 Z" fill="#2e4e38" opacity="0.7"></path>
+        <path d="M103 120 Q120 115 124 107 Q111 108 103 117 Z" fill="#3f6449" opacity="0.65"></path>
+        <path d="M103 100 Q84 95 80 86 Q93 87 103 97 Z" fill="#3f6449" opacity="0.7"></path>
+        <path d="M103 100 Q121 94 125 85 Q112 87 103 97 Z" fill="#2e4e38" opacity="0.65"></path>
+        <path d="M104 80 Q86 74 82 65 Q95 67 104 77 Z" fill="#4a7a5a" opacity="0.65"></path>
+        <path d="M104 80 Q122 73 126 64 Q113 66 104 77 Z" fill="#3f6449" opacity="0.6"></path>
+        <path d="M122 120 Q104 115 100 106 Q113 106 122 117 Z" fill="#2e4e38" opacity="0.6"></path>
+        <path d="M122 100 Q104 94 100 84 Q113 86 122 97 Z" fill="#3f6449" opacity="0.55"></path>
+        <!-- Small blue flower dots -->
+        <circle cx="108" cy="22" r="3.5" fill="#3b3265" opacity="0.7"></circle>
+        <circle cx="104" cy="14" r="2.5" fill="#5a4f8a" opacity="0.65"></circle>
+        <circle cx="112" cy="16" r="2" fill="#3b3265" opacity="0.6"></circle>
+        <circle cx="126" cy="36" r="3" fill="#4a408a" opacity="0.65"></circle>
+        <circle cx="122" cy="26" r="2.5" fill="#3b3265" opacity="0.6"></circle>
+      </svg>
+      <div class="banner-text-wrap">
+        <div class="banner-eyebrow">Customize</div>
+        <div class="banner-title">Your<br><em>Lists</em></div>
+        <div class="banner-rule"></div>
+      </div>
+    </div>
+
+    <p class="edit-intro">Add or remove tasks from any list. Changes save automatically and show up in your daily routines right away.</p>
+
+    <div class="section-head">
+      <span class="section-head-label">Morning Tasks</span>
+      <div class="section-rule"></div>
+    </div>
+    <div class="edit-section" id="editMorningList"><div class="edit-section-header"><span class="edit-section-title">Morning</span><span class="edit-section-count">7</span></div><div class="edit-item"><div class="edit-item-text">Listen to devotional<div class="edit-item-sub">Tap above to open Renewing Your Mind or Audible</div></div><button class="delete-btn">×</button></div><div class="edit-item"><div class="edit-item-text">Decide what's for dinner<div class="edit-item-sub">Check the fridge and get meat out to defrost</div></div><button class="delete-btn">×</button></div><div class="edit-item"><div class="edit-item-text">Quick tidy — living areas<div class="edit-item-sub">Pillows, blankets, surfaces</div></div><button class="delete-btn">×</button></div><div class="edit-item"><div class="edit-item-text">Wipe kitchen counters</div><button class="delete-btn">×</button></div><div class="edit-item"><div class="edit-item-text">Empty or run the dishwasher</div><button class="delete-btn">×</button></div><div class="edit-item"><div class="edit-item-text">Start a load of laundry<div class="edit-item-sub">Or move yesterday's load forward</div></div><button class="delete-btn">×</button></div><div class="edit-item"><div class="edit-item-text">Swish &amp; swipe the bathroom<div class="edit-item-sub">Quick toilet wipe, sink wipe, mirror if needed</div></div><button class="delete-btn">×</button></div><div class="add-task-row"><input class="add-task-input" id="addInput_morning" type="text" placeholder="Add a task…" maxlength="80"><button class="add-task-btn">Add</button></div></div>
+
+    <div class="section-head">
+      <span class="section-head-label">Evening Tasks</span>
+      <div class="section-rule"></div>
+    </div>
+    <div class="edit-section" id="editEveningList"><div class="edit-section-header"><span class="edit-section-title">Evening</span><span class="edit-section-count">5</span></div><div class="edit-item"><div class="edit-item-text">Clear and wipe kitchen counters</div><button class="delete-btn">×</button></div><div class="edit-item"><div class="edit-item-text">Load or run the dishwasher</div><button class="delete-btn">×</button></div><div class="edit-item"><div class="edit-item-text">Move laundry forward or fold what's done</div><button class="delete-btn">×</button></div><div class="edit-item"><div class="edit-item-text">Quick living room reset<div class="edit-item-sub">Pillows, throw blankets, anything out of place</div></div><button class="delete-btn">×</button></div><div class="edit-item"><div class="edit-item-text">Set out anything needed for tomorrow morning</div><button class="delete-btn">×</button></div><div class="add-task-row"><input class="add-task-input" id="addInput_evening" type="text" placeholder="Add a task…" maxlength="80"><button class="add-task-btn">Add</button></div></div>
+
+    <div class="section-head">
+      <span class="section-head-label">Zone Tasks</span>
+      <div class="section-rule"></div>
+    </div>
+    <p class="edit-intro" style="margin-bottom:12px">Each zone rotates Mon–Fri. Select a zone to edit its tasks.</p>
+    <div class="zone-edit-tabs" id="zonePills"><button class="zone-pill active">Entrance &amp; Dining</button><button class="zone-pill">Kitchen Deep Clean</button><button class="zone-pill">Bathroom &amp; Laundry</button><button class="zone-pill">Bedroom &amp; Closets</button><button class="zone-pill">Living Room</button></div>
+    <div class="edit-section" id="editZoneList"><div class="edit-section-header"><span class="edit-section-title">Entrance &amp; Dining</span><span class="edit-section-count">3</span></div><div class="edit-item"><div class="edit-item-text">Clear and wipe entry surfaces</div><button class="delete-btn">×</button></div><div class="edit-item"><div class="edit-item-text">Sweep or vacuum entryway</div><button class="delete-btn">×</button></div><div class="edit-item"><div class="edit-item-text">Wipe dining table and chairs</div><button class="delete-btn">×</button></div><div class="add-task-row"><input class="add-task-input" id="addInput_zone0" type="text" placeholder="Add a zone task…" maxlength="80"><button class="add-task-btn">Add</button></div></div>
+  </div>
+
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const DEFAULT_MORNING = [
+  { id: 'm1', text: 'Listen to devotional', sub: 'Tap above to open Renewing Your Mind or Audible' },
+  { id: 'm2', text: 'Decide what\'s for dinner', sub: 'Check the fridge and get meat out to defrost' },
+  { id: 'm3', text: 'Quick tidy — living areas', sub: 'Pillows, blankets, surfaces' },
+  { id: 'm4', text: 'Wipe kitchen counters' },
+  { id: 'm5', text: 'Empty or run the dishwasher' },
+  { id: 'm6', text: 'Start a load of laundry', sub: 'Or move yesterday\'s load forward' },
+  { id: 'm7', text: 'Swish & swipe the bathroom', sub: 'Quick toilet wipe, sink wipe, mirror if needed' },
+];
+
+const DEFAULT_EVENING = [
+  { id: 'e1', text: 'Clear and wipe kitchen counters' },
+  { id: 'e2', text: 'Load or run the dishwasher' },
+  { id: 'e3', text: 'Move laundry forward or fold what\'s done' },
+  { id: 'e4', text: 'Quick living room reset', sub: 'Pillows, throw blankets, anything out of place' },
+  { id: 'e5', text: 'Set out anything needed for tomorrow morning' },
+];
+
+const DEFAULT_ZONES = [
+  { name: 'Entrance & Dining', tip: 'Clear the entry, wipe the table, sweep near the door.', tasks: [
+    { id: 'z1a', text: 'Clear and wipe entry surfaces' },
+    { id: 'z1b', text: 'Sweep or vacuum entryway' },
+    { id: 'z1c', text: 'Wipe dining table and chairs' },
+  ]},
+  { name: 'Kitchen Deep Clean', tip: 'Beyond the daily wipe — appliance fronts, inside microwave, stovetop.', tasks: [
+    { id: 'z2a', text: 'Wipe appliance fronts' },
+    { id: 'z2b', text: 'Clean inside microwave' },
+    { id: 'z2c', text: 'Scrub stovetop' },
+  ]},
+  { name: 'Bathroom & Laundry', tip: 'Scrub the toilet, clean the tub or shower, shake out rugs.', tasks: [
+    { id: 'z3a', text: 'Scrub toilet thoroughly' },
+    { id: 'z3b', text: 'Clean tub or shower' },
+    { id: 'z3c', text: 'Shake out and replace rugs' },
+  ]},
+  { name: 'Bedroom & Closets', tip: 'Make beds properly, declutter surfaces, put away anything out of place.', tasks: [
+    { id: 'z4a', text: 'Make beds properly' },
+    { id: 'z4b', text: 'Clear and wipe bedroom surfaces' },
+    { id: 'z4c', text: 'Declutter one small area or shelf' },
+  ]},
+  { name: 'Living Room', tip: 'Vacuum, dust surfaces, return anything that\'s wandered from its home.', tasks: [
+    { id: 'z5a', text: 'Vacuum living area' },
+    { id: 'z5b', text: 'Dust surfaces' },
+    { id: 'z5c', text: 'Return misplaced items to their homes' },
+  ]},
+];
+
+function loadTasks(key, defaults) {
+  const saved = localStorage.getItem('tasks_' + key);
+  if (saved) { try { return JSON.parse(saved); } catch(e) {} }
+  return JSON.parse(JSON.stringify(defaults));
+}
+
+function saveTasks(key, data) { localStorage.setItem('tasks_' + key, JSON.stringify(data)); }
+
+let morningTasks = loadTasks('morning', DEFAULT_MORNING);
+let eveningTasks = loadTasks('evening', DEFAULT_EVENING);
+let zones = loadTasks('zones', DEFAULT_ZONES);
+
+const today = new Date();
+const dayOfWeek = today.getDay();
+const weekdayIndex = [1,2,3,4,5].indexOf(dayOfWeek);
+const zoneIndex = weekdayIndex >= 0 ? weekdayIndex : (dayOfWeek === 0 ? 4 : 0);
+const dateKey = today.toISOString().split('T')[0];
+const storageKey = 'homeRhythm_' + dateKey;
+let state = JSON.parse(localStorage.getItem(storageKey) || '{}');
+
+function saveState() { localStorage.setItem(storageKey, JSON.stringify(state)); }
+
+function init() {
+  const h = today.getHours();
+  const greeting = h < 12 ? 'Morning Routine' : h < 17 ? 'Afternoon Check-In' : 'Evening Wind Down';
+  document.getElementById('headerSub').textContent = greeting;
+  document.getElementById('dateDay').textContent = today.getDate();
+  document.getElementById('dateMonth').textContent = today.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+
+  loadProverbs(today.getDate());
+
+  const zone = zones[zoneIndex];
+  document.getElementById('zoneName').textContent = zone.name;
+  document.getElementById('zoneTip').textContent = zone.tip;
+
+  renderMorning();
+  renderEvening();
+  renderEditMode();
+}
+
+function checkIcon() {
+  return '<svg class="check-icon" width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#faf6ee" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+}
+
+function renderChecklist(containerId, tasks, prefix) {
+  const container = document.getElementById(containerId);
+  container.innerHTML = '';
+  if (!tasks.length) {
+    container.innerHTML = '<div style="padding:16px;font-family:Josefin Sans,sans-serif;font-size:11px;letter-spacing:.06em;color:var(--ink-light);text-align:center">No tasks yet — add some in Edit Lists.</div>';
+    return;
+  }
+  tasks.forEach(task => {
+    const key = prefix + task.id;
+    const done = !!state[key];
+    const item = document.createElement('div');
+    item.className = 'check-item' + (done ? ' done' : '');
+    item.innerHTML = '<div class="checkbox">' + checkIcon() + '</div><div><div class="item-text">' + task.text + '</div>' + (task.sub ? '<div class="item-sub">' + task.sub + '</div>' : '') + '</div>';
+    item.addEventListener('click', () => {
+      state[key] = !state[key];
+      saveState();
+      renderChecklist(containerId, tasks, prefix);
+      updateMorningProgress();
+      updateEveningProgress();
+      if (state[key]) showToast(getEncouragement());
+    });
+    container.appendChild(item);
+  });
+}
+
+function renderMorning() {
+  renderChecklist('morningChecklist', morningTasks, 'morning_');
+  renderChecklist('zoneChecklist', zones[zoneIndex].tasks, 'zone_');
+  updateMorningProgress();
+}
+
+function renderEvening() {
+  renderChecklist('eveningChecklist', eveningTasks, 'evening_');
+  updateEveningProgress();
+}
+
+function updateMorningProgress() {
+  const allTasks = [...morningTasks, ...zones[zoneIndex].tasks];
+  const done = allTasks.filter(t => state['morning_' + t.id] || state['zone_' + t.id]).length;
+  const total = allTasks.length;
+  document.getElementById('morningProgressCount').textContent = done + ' / ' + total;
+  document.getElementById('morningProgressFill').style.width = (total ? (done/total)*100 : 0) + '%';
+  document.getElementById('morningDone').style.display = (total && done === total) ? 'block' : 'none';
+}
+
+function updateEveningProgress() {
+  const done = eveningTasks.filter(t => state['evening_' + t.id]).length;
+  const total = eveningTasks.length;
+  document.getElementById('eveningProgressCount').textContent = done + ' / ' + total;
+  document.getElementById('eveningProgressFill').style.width = (total ? (done/total)*100 : 0) + '%';
+  document.getElementById('eveningDone').style.display = (total && done === total) ? 'block' : 'none';
+}
+
+let activeZoneEdit = 0;
+
+function renderEditMode() {
+  renderEditList('editMorningList', morningTasks, 'morning');
+  renderEditList('editEveningList', eveningTasks, 'evening');
+  renderZonePills();
+  renderEditZone(activeZoneEdit);
+}
+
+function renderEditList(containerId, tasks, type) {
+  const container = document.getElementById(containerId);
+  container.innerHTML = '';
+  const header = document.createElement('div');
+  header.className = 'edit-section-header';
+  header.innerHTML = '<span class="edit-section-title">' + (type === 'morning' ? 'Morning' : 'Evening') + '</span><span class="edit-section-count">' + tasks.length + '</span>';
+  container.appendChild(header);
+  tasks.forEach((task, i) => {
+    const row = document.createElement('div');
+    row.className = 'edit-item';
+    row.innerHTML = '<div class="edit-item-text">' + task.text + (task.sub ? '<div class="edit-item-sub">' + task.sub + '</div>' : '') + '</div><button class="delete-btn">&times;</button>';
+    row.querySelector('.delete-btn').addEventListener('click', () => {
+      tasks.splice(i, 1);
+      if (type === 'morning') { saveTasks('morning', morningTasks); renderMorning(); }
+      else { saveTasks('evening', eveningTasks); renderEvening(); }
+      renderEditMode();
+      showToast('Removed');
+    });
+    container.appendChild(row);
+  });
+  const addRow = document.createElement('div');
+  addRow.className = 'add-task-row';
+  const inputId = 'addInput_' + type;
+  addRow.innerHTML = '<input class="add-task-input" id="' + inputId + '" type="text" placeholder="Add a task…" maxlength="80"><button class="add-task-btn">Add</button>';
+  addRow.querySelector('.add-task-btn').addEventListener('click', () => addTask(type, inputId));
+  addRow.querySelector('.add-task-input').addEventListener('keydown', e => { if (e.key === 'Enter') addTask(type, inputId); });
+  container.appendChild(addRow);
+}
+
+function addTask(type, inputId) {
+  const input = document.getElementById(inputId);
+  const text = input.value.trim();
+  if (!text) return;
+  const task = { id: type + '_u' + Date.now(), text };
+  if (type === 'morning') { morningTasks.push(task); saveTasks('morning', morningTasks); renderMorning(); }
+  else { eveningTasks.push(task); saveTasks('evening', eveningTasks); renderEvening(); }
+  input.value = '';
+  renderEditMode();
+  showToast('Added');
+}
+
+function renderZonePills() {
+  const container = document.getElementById('zonePills');
+  container.innerHTML = '';
+  zones.forEach((z, i) => {
+    const pill = document.createElement('button');
+    pill.className = 'zone-pill' + (i === activeZoneEdit ? ' active' : '');
+    pill.textContent = z.name;
+    pill.addEventListener('click', () => { activeZoneEdit = i; renderZonePills(); renderEditZone(i); });
+    container.appendChild(pill);
+  });
+}
+
+function renderEditZone(i) {
+  const zone = zones[i];
+  const container = document.getElementById('editZoneList');
+  container.innerHTML = '';
+  const header = document.createElement('div');
+  header.className = 'edit-section-header';
+  header.innerHTML = '<span class="edit-section-title">' + zone.name + '</span><span class="edit-section-count">' + zone.tasks.length + '</span>';
+  container.appendChild(header);
+  zone.tasks.forEach((task, ti) => {
+    const row = document.createElement('div');
+    row.className = 'edit-item';
+    row.innerHTML = '<div class="edit-item-text">' + task.text + '</div><button class="delete-btn">&times;</button>';
+    row.querySelector('.delete-btn').addEventListener('click', () => {
+      zone.tasks.splice(ti, 1);
+      saveTasks('zones', zones);
+      renderMorning();
+      renderEditZone(i);
+      renderZonePills();
+      showToast('Removed');
+    });
+    container.appendChild(row);
+  });
+  const addRow = document.createElement('div');
+  addRow.className = 'add-task-row';
+  const inputId = 'addInput_zone' + i;
+  addRow.innerHTML = '<input class="add-task-input" id="' + inputId + '" type="text" placeholder="Add a zone task…" maxlength="80"><button class="add-task-btn">Add</button>';
+  addRow.querySelector('.add-task-btn').addEventListener('click', () => addZoneTask(i, inputId));
+  addRow.querySelector('.add-task-input').addEventListener('keydown', e => { if (e.key === 'Enter') addZoneTask(i, inputId); });
+  container.appendChild(addRow);
+}
+
+function addZoneTask(i, inputId) {
+  const input = document.getElementById(inputId);
+  const text = input.value.trim();
+  if (!text) return;
+  zones[i].tasks.push({ id: 'zu' + i + '_' + Date.now(), text });
+  saveTasks('zones', zones);
+  renderMorning();
+  input.value = '';
+  renderEditZone(i);
+  renderZonePills();
+  showToast('Added');
+}
+
+function resetMorning() {
+  morningTasks.forEach(t => delete state['morning_' + t.id]);
+  zones[zoneIndex].tasks.forEach(t => delete state['zone_' + t.id]);
+  saveState(); renderMorning();
+}
+
+function resetEvening() {
+  eveningTasks.forEach(t => delete state['evening_' + t.id]);
+  saveState(); renderEvening();
+}
+
+const ENCOURAGEMENTS = ['One thing at a time.', 'The house thanks you.', 'Well done.', 'Keep going.', 'One less thing.', 'That\'s the way.'];
+function getEncouragement() { return ENCOURAGEMENTS[Math.floor(Math.random() * ENCOURAGEMENTS.length)]; }
+
+let toastTimer;
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove('show'), 2000);
+}
+
+function showPanel(name, btn) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('panel-' + name).classList.add('active');
+  btn.classList.add('active');
+  const h = today.getHours();
+  const labels = { morning: h < 12 ? 'Morning Routine' : 'Morning Tasks', evening: 'Evening Wind Down', edit: 'Edit Your Lists' };
+  document.getElementById('headerSub').textContent = labels[name] || '';
+}
+
+async function loadProverbs(day) {
+  const el = document.getElementById('morningQuote');
+  const labelEl = document.getElementById('devoLabel');
+  const chapter = Math.min(day, 31);
+  const cacheKey = 'proverbs_' + chapter;
+  const cached = localStorage.getItem(cacheKey);
+  if (cached) { displayProverbs(cached, chapter, labelEl, el); return; }
+  try {
+    const res = await fetch('https://bible-api.com/proverbs+' + chapter + '?translation=kjv');
+    const data = await res.json();
+    if (data && data.text) { localStorage.setItem(cacheKey, data.text); displayProverbs(data.text, chapter, labelEl, el); }
+    else { loadFallbackProverbs(labelEl, el); }
+  } catch(e) { loadFallbackProverbs(labelEl, el); }
+}
+
+function loadFallbackProverbs(labelEl, el) {
+  const cached = localStorage.getItem('proverbs_31');
+  if (cached) { displayProverbs(cached, 31, labelEl, el); return; }
+  fetch('https://bible-api.com/proverbs+31?translation=kjv')
+    .then(r => r.json())
+    .then(data => {
+      if (data && data.text) { localStorage.setItem('proverbs_31', data.text); displayProverbs(data.text, 31, labelEl, el); }
+      else { labelEl.textContent = 'Proverbs 31'; el.textContent = 'She looks well to the ways of her household, and does not eat the bread of idleness.'; }
+    })
+    .catch(() => { labelEl.textContent = 'Proverbs 31'; el.textContent = 'She looks well to the ways of her household, and does not eat the bread of idleness.'; });
+}
+
+function displayProverbs(fullText, chapter, labelEl, el) {
+  const verses = fullText.trim().split('\n').filter(v => v.trim().length > 0);
+  const preview = verses.slice(0, 3).join(' ').replace(/\s+/g, ' ').trim();
+  labelEl.textContent = 'Proverbs ' + chapter;
+  el.textContent = preview + (verses.length > 3 ? ' …' : '');
+}
+
+init();
+</script>
+
+
+</body></html>
