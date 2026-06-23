@@ -1013,13 +1013,13 @@
       <span class="section-head-label">Morning Tasks</span>
       <div class="section-rule"></div>
     </div>
-    <div class="edit-section" id="editMorningList"><div class="edit-section-header"><span class="edit-section-title">Morning</span><span class="edit-section-count">7</span></div><div class="edit-item"><div class="edit-item-text">Listen to devotional<div class="edit-item-sub">Tap above to open Renewing Your Mind or Audible</div></div><button class="delete-btn">×</button></div><div class="edit-item"><div class="edit-item-text">Decide what's for dinner<div class="edit-item-sub">Check the fridge and get meat out to defrost</div></div><button class="delete-btn">×</button></div><div class="edit-item"><div class="edit-item-text">Quick tidy — living areas<div class="edit-item-sub">Pillows, blankets, surfaces</div></div><button class="delete-btn">×</button></div><div class="edit-item"><div class="edit-item-text">Wipe kitchen counters</div><button class="delete-btn">×</button></div><div class="edit-item"><div class="edit-item-text">Empty or run the dishwasher</div><button class="delete-btn">×</button></div><div class="edit-item"><div class="edit-item-text">Start a load of laundry<div class="edit-item-sub">Or move yesterday's load forward</div></div><button class="delete-btn">×</button></div><div class="edit-item"><div class="edit-item-text">Swish &amp; swipe the bathroom<div class="edit-item-sub">Quick toilet wipe, sink wipe, mirror if needed</div></div><button class="delete-btn">×</button></div><div class="add-task-row"><input class="add-task-input" id="addInput_morning" type="text" placeholder="Add a task…" maxlength="80"><button class="add-task-btn">Add</button></div></div>
+    <div class="edit-section" id="editMorningList"></div>
 
     <div class="section-head">
       <span class="section-head-label">Evening Tasks</span>
       <div class="section-rule"></div>
     </div>
-    <div class="edit-section" id="editEveningList"><div class="edit-section-header"><span class="edit-section-title">Evening</span><span class="edit-section-count">5</span></div><div class="edit-item"><div class="edit-item-text">Clear and wipe kitchen counters</div><button class="delete-btn">×</button></div><div class="edit-item"><div class="edit-item-text">Load or run the dishwasher</div><button class="delete-btn">×</button></div><div class="edit-item"><div class="edit-item-text">Move laundry forward or fold what's done</div><button class="delete-btn">×</button></div><div class="edit-item"><div class="edit-item-text">Quick living room reset<div class="edit-item-sub">Pillows, throw blankets, anything out of place</div></div><button class="delete-btn">×</button></div><div class="edit-item"><div class="edit-item-text">Set out anything needed for tomorrow morning</div><button class="delete-btn">×</button></div><div class="add-task-row"><input class="add-task-input" id="addInput_evening" type="text" placeholder="Add a task…" maxlength="80"><button class="add-task-btn">Add</button></div></div>
+    <div class="edit-section" id="editEveningList"></div>
 
     <div class="section-head">
       <span class="section-head-label">Zone Tasks</span>
@@ -1097,11 +1097,27 @@ const today = new Date();
 const dayOfWeek = today.getDay();
 const weekdayIndex = [1,2,3,4,5].indexOf(dayOfWeek);
 const zoneIndex = weekdayIndex >= 0 ? weekdayIndex : (dayOfWeek === 0 ? 4 : 0);
-const dateKey = today.toISOString().split('T')[0];
+const dateKey = today.getFullYear() + '-' + String(today.getMonth()+1).padStart(2,'0') + '-' + String(today.getDate()).padStart(2,'0');
 const storageKey = 'homeRhythm_' + dateKey;
 let state = JSON.parse(localStorage.getItem(storageKey) || '{}');
 
 function saveState() { localStorage.setItem(storageKey, JSON.stringify(state)); }
+
+function getDailyZoneTasks(zoneIdx) {
+  const zone = zones[zoneIdx];
+  if (zone.tasks.length <= 2) return zone.tasks;
+  const cacheKey = 'zone_daily_' + zoneIdx + '_' + dateKey;
+  const cached = localStorage.getItem(cacheKey);
+  if (cached) {
+    const ids = JSON.parse(cached);
+    const tasks = ids.map(id => zone.tasks.find(t => t.id === id)).filter(Boolean);
+    if (tasks.length === 2) return tasks;
+  }
+  const shuffled = [...zone.tasks].sort(() => Math.random() - 0.5);
+  const selected = shuffled.slice(0, 2);
+  localStorage.setItem(cacheKey, JSON.stringify(selected.map(t => t.id)));
+  return selected;
+}
 
 function init() {
   const h = today.getHours();
@@ -1160,7 +1176,7 @@ function renderChecklist(containerId, tasks, prefix) {
 
 function renderMorning() {
   renderChecklist('morningChecklist', morningTasks, 'morning_');
-  renderChecklist('zoneChecklist', zones[zoneIndex].tasks, 'zone_');
+  renderChecklist('zoneChecklist', getDailyZoneTasks(zoneIndex), 'zone_');
   updateMorningProgress();
 }
 
@@ -1170,7 +1186,7 @@ function renderEvening() {
 }
 
 function updateMorningProgress() {
-  const allTasks = [...morningTasks, ...zones[zoneIndex].tasks];
+  const allTasks = [...morningTasks, ...getDailyZoneTasks(zoneIndex)];
   const done = allTasks.filter(t => state['morning_' + t.id] || state['zone_' + t.id]).length;
   const total = allTasks.length;
   document.getElementById('morningProgressCount').textContent = done + ' / ' + total;
@@ -1202,17 +1218,11 @@ function renderEditList(containerId, tasks, type) {
   header.className = 'edit-section-header';
   header.innerHTML = '<span class="edit-section-title">' + (type === 'morning' ? 'Morning' : 'Evening') + '</span><span class="edit-section-count">' + tasks.length + '</span>';
   container.appendChild(header);
-  tasks.forEach((task, i) => {
+  tasks.forEach((task) => {
     const row = document.createElement('div');
     row.className = 'edit-item';
+    row.dataset.id = task.id;
     row.innerHTML = '<div class="edit-item-text">' + task.text + (task.sub ? '<div class="edit-item-sub">' + task.sub + '</div>' : '') + '</div><button class="delete-btn">&times;</button>';
-    row.querySelector('.delete-btn').addEventListener('click', () => {
-      tasks.splice(i, 1);
-      if (type === 'morning') { saveTasks('morning', morningTasks); renderMorning(); }
-      else { saveTasks('evening', eveningTasks); renderEvening(); }
-      renderEditMode();
-      showToast('Removed');
-    });
     container.appendChild(row);
   });
   const addRow = document.createElement('div');
@@ -1222,6 +1232,18 @@ function renderEditList(containerId, tasks, type) {
   addRow.querySelector('.add-task-btn').addEventListener('click', () => addTask(type, inputId));
   addRow.querySelector('.add-task-input').addEventListener('keydown', e => { if (e.key === 'Enter') addTask(type, inputId); });
   container.appendChild(addRow);
+  container.addEventListener('click', function handleDelete(e) {
+    if (!e.target.classList.contains('delete-btn')) return;
+    const id = e.target.closest('.edit-item').dataset.id;
+    const list = type === 'morning' ? morningTasks : eveningTasks;
+    const idx = list.findIndex(t => t.id === id);
+    if (idx === -1) return;
+    list.splice(idx, 1);
+    if (type === 'morning') { saveTasks('morning', morningTasks); renderMorning(); }
+    else { saveTasks('evening', eveningTasks); renderEvening(); }
+    renderEditMode();
+    showToast('Removed');
+  }, { once: true });
 }
 
 function addTask(type, inputId) {
@@ -1256,20 +1278,25 @@ function renderEditZone(i) {
   header.className = 'edit-section-header';
   header.innerHTML = '<span class="edit-section-title">' + zone.name + '</span><span class="edit-section-count">' + zone.tasks.length + '</span>';
   container.appendChild(header);
-  zone.tasks.forEach((task, ti) => {
+  zone.tasks.forEach((task) => {
     const row = document.createElement('div');
     row.className = 'edit-item';
+    row.dataset.id = task.id;
     row.innerHTML = '<div class="edit-item-text">' + task.text + '</div><button class="delete-btn">&times;</button>';
-    row.querySelector('.delete-btn').addEventListener('click', () => {
-      zone.tasks.splice(ti, 1);
-      saveTasks('zones', zones);
-      renderMorning();
-      renderEditZone(i);
-      renderZonePills();
-      showToast('Removed');
-    });
     container.appendChild(row);
   });
+  container.addEventListener('click', function handleZoneDelete(e) {
+    if (!e.target.classList.contains('delete-btn')) return;
+    const id = e.target.closest('.edit-item').dataset.id;
+    const idx = zone.tasks.findIndex(t => t.id === id);
+    if (idx === -1) return;
+    zone.tasks.splice(idx, 1);
+    saveTasks('zones', zones);
+    renderMorning();
+    renderEditZone(i);
+    renderZonePills();
+    showToast('Removed');
+  }, { once: true });
   const addRow = document.createElement('div');
   addRow.className = 'add-task-row';
   const inputId = 'addInput_zone' + i;
