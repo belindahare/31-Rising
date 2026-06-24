@@ -1103,6 +1103,42 @@ let state = JSON.parse(localStorage.getItem(storageKey) || '{}');
 
 function saveState() { localStorage.setItem(storageKey, JSON.stringify(state)); }
 
+document.addEventListener('click', (e) => {
+  if (!e.target.classList.contains('delete-btn')) return;
+  const row = e.target.closest('.edit-item');
+  if (!row) return;
+  const id = row.dataset.taskId;
+  const listType = row.dataset.listType;
+  if (listType === 'morning') {
+    const idx = morningTasks.findIndex(t => t.id === id);
+    if (idx === -1) return;
+    morningTasks.splice(idx, 1);
+    saveTasks('morning', morningTasks);
+    renderMorning();
+    renderEditMode();
+    showToast('Removed');
+  } else if (listType === 'evening') {
+    const idx = eveningTasks.findIndex(t => t.id === id);
+    if (idx === -1) return;
+    eveningTasks.splice(idx, 1);
+    saveTasks('evening', eveningTasks);
+    renderEvening();
+    renderEditMode();
+    showToast('Removed');
+  } else if (listType === 'zone') {
+    const zIdx = parseInt(row.dataset.zoneIndex);
+    const zone = zones[zIdx];
+    const idx = zone.tasks.findIndex(t => t.id === id);
+    if (idx === -1) return;
+    zone.tasks.splice(idx, 1);
+    saveTasks('zones', zones);
+    renderMorning();
+    renderEditZone(zIdx);
+    renderZonePills();
+    showToast('Removed');
+  }
+});
+
 function getDailyZoneTasks(zoneIdx) {
   const zone = zones[zoneIdx];
   if (zone.tasks.length <= 2) return zone.tasks;
@@ -1221,17 +1257,9 @@ function renderEditList(containerId, tasks, type) {
   tasks.forEach((task) => {
     const row = document.createElement('div');
     row.className = 'edit-item';
+    row.dataset.taskId = task.id;
+    row.dataset.listType = type;
     row.innerHTML = '<div class="edit-item-text">' + task.text + (task.sub ? '<div class="edit-item-sub">' + task.sub + '</div>' : '') + '</div><button class="delete-btn">&times;</button>';
-    row.querySelector('.delete-btn').addEventListener('click', () => {
-      const list = type === 'morning' ? morningTasks : eveningTasks;
-      const idx = list.findIndex(t => t.id === task.id);
-      if (idx === -1) return;
-      list.splice(idx, 1);
-      if (type === 'morning') { saveTasks('morning', morningTasks); renderMorning(); }
-      else { saveTasks('evening', eveningTasks); renderEvening(); }
-      renderEditMode();
-      showToast('Removed');
-    });
     container.appendChild(row);
   });
   const addRow = document.createElement('div');
@@ -1278,17 +1306,10 @@ function renderEditZone(i) {
   zone.tasks.forEach((task) => {
     const row = document.createElement('div');
     row.className = 'edit-item';
+    row.dataset.taskId = task.id;
+    row.dataset.listType = 'zone';
+    row.dataset.zoneIndex = i;
     row.innerHTML = '<div class="edit-item-text">' + task.text + '</div><button class="delete-btn">&times;</button>';
-    row.querySelector('.delete-btn').addEventListener('click', () => {
-      const idx = zone.tasks.findIndex(t => t.id === task.id);
-      if (idx === -1) return;
-      zone.tasks.splice(idx, 1);
-      saveTasks('zones', zones);
-      renderMorning();
-      renderEditZone(i);
-      renderZonePills();
-      showToast('Removed');
-    });
     container.appendChild(row);
   });
   const addRow = document.createElement('div');
